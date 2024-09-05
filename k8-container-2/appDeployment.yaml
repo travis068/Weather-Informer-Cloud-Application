@@ -1,0 +1,31 @@
+# Reference: Deployments. (2023, September 6). Kubernetes. https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-2-deployment
+  labels:
+    app: app2
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/csci-5409-f23/k8-container-2/app:latest
+        imagePullPolicy: Always
+        name: app2
+        ports:
+        - containerPort: 6001
+        volumeMounts:
+        - name: app-volume
+          mountPath: /rabia_PV_dir
+      volumes:
+      - name: app-volume
+        persistentVolumeClaim:
+          claimName: containers-pvc

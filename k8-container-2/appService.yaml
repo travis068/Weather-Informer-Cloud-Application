@@ -1,0 +1,13 @@
+# Reference: Service. (2023, October 13). Kubernetes. https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: container-2-service
+
+spec:
+  selector:
+    app: app2
+  ports:
+  - protocol: TCP
+    port: 6001
+    targetPort: 6001
